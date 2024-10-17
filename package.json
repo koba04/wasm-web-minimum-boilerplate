@@ -1,16 +1,17 @@
 {
   "name": "wasm-web-minimum-boilerplate",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A minimal boilerplate for WASM on the web",
+  "main": "public/index.js",
   "scripts": {
-    "build": "npm run build:wasm && npm run build:bindgen",
-    "build:wasm": "cargo build --target wasm32-unknown-unknown",
-    "build:bindgen": "wasm-bindgen target/wasm32-unknown-unknown/debug/hello.wasm --out-dir ./public/wasm --target web",
-    "clean": "rm -rf public/wasm",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "cargo build --target wasm32-unknown-unknown",
+    "postbuild": "wasm-bindgen target/wasm32-unknown-unknown/debug/hello.wasm --out-dir ./public/wasm --target web",
+    "clean": "rm -rf public/wasm target",
+    "prestart": "npm run build",
+    "start": "http-server",
+    "test": "cargo test"
   },
-  "keywords": [],
+  "keywords": ["wasm"],
   "author": "koba04",
   "license": "MIT",
   "devDependencies": {

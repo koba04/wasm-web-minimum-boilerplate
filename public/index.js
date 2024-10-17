@@ -1,5 +1,11 @@
 import init, { greet, encode_base64 } from './wasm/hello.js';
 
-await init(); // Initialize the wasm module
-greet('Hello WASM!!!'); // Call the greet function from Rust
-console.log(encode_base64('Hello, World!')); // Call the encode function from Rust
+await init();
+
+document.querySelector('.alert').addEventListener('click', () => {
+    greet("Hello!");
+});
+
+document.querySelector('.encode').addEventListener('click', () => {
+    document.querySelector('.result').textContent = encode_base64(document.querySelector('.input').value);
+});
